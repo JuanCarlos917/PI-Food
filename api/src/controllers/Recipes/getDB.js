@@ -19,22 +19,27 @@ const getDb = async () => {
 				},
 			},
 		});
-		return await recipes.map((e)=>{
-            return {
-                id: e.dataValues.id,
-                title: e.dataValues.title,
-                summary: e.dataValues.summary,
-                healthScore: e.dataValues.healthScore,
-                image: e.dataValues.image,
-                steps: e.dataValues.steps,
-                diet: e.dataValues.diet.map((y) => {
-                    return {
-                        name: y.name,
-                    };
-                }),
-                creteDb: e.dataValues.creteDb,
-            }
-        })
+
+		if (recipes.length === 0) {
+			return [];
+		} else {
+			return recipes.map((e) => {
+				return {
+					id: e.dataValues.id,
+					title: e.dataValues.title,
+					summary: e.dataValues.summary,
+					healthScore: e.dataValues.healthScore,
+					image: e.dataValues.image,
+					steps: e.dataValues.steps,
+					diet: e.dataValues.diet.map((y) => {
+						return {
+							name: y.name,
+						};
+					}),
+					createDb: e.dataValues.createDb,
+				};
+			});
+		}
 	} catch (error) {
 		return { msg: error.message };
 	}

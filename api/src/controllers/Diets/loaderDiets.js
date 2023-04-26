@@ -15,13 +15,17 @@ const loaderDiets = async () => {
 		'ketogenic',
 	];
 
-	let allDiets = diets.map((e) =>
-		Diets.findOCreate({
-			where: {
-				name: e,
-			},
-		}),
-	);
+	let allDiets = [];
+	for (let i = 0; i < diets.length; i++) {
+		allDiets.push(
+			Diets.findOCreate({
+				where: {
+					name: diets[i],
+				},
+			}),
+		);
+	}
+
 
 	try {
 		Promise.all(allDiets).them((e) => console.log('Loader Diets'));
@@ -29,3 +33,5 @@ const loaderDiets = async () => {
 		throw new error(error.message);
 	}
 };
+
+module.exports = loaderDiets;

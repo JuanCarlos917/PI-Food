@@ -1,20 +1,17 @@
 const { Diets } = require('../../db');
 
-const getDiets = async () => {
+const getDietsDb = async () => {
 	const diets = await Diets.findAll({
 		attributes: ['name', 'id'],
 	});
 
-    const dietsAllArray = [];
+	const dietsAllArray = [];
 
-    diets.forEach((diet) => {
-        dietsAllArray.push({
-            id: diet.id,
-            name: diet.name,
-        });
-    });
+	diets.forEach((diet) =>
+		dietsAllArray.push({name: diet.name, id: diet.id }),
+	);
 
-    return dietsAllArray;
+	return dietsAllArray;
 };
 
-module.exports = getDiets;
+module.exports = getDietsDb;

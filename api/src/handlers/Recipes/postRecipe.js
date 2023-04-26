@@ -1,4 +1,4 @@
-const postRecipes = require('../../controllers/Recipes/postRecipes');
+const postRecipes = require('../../controllers/Recipes/postDataRecipes');
 
 const postRecipe = async (req, res) => {
 	const { title, summary, healthScore, steps, image, diets } = req.body;

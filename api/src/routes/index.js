@@ -6,14 +6,17 @@ const {
 	getRecipeByname,
 	postRecipe,
 } = require('../handlers/Recipes');
-
+const{getDiets} = require('../handlers/Diets')
+// Configurar los routers
+// Ejemplo: router.use('/auth', authRouter);
 const router = Router();
-
+//recipe
 router.get('/', getRecipeByname)
 router.get('/:id', getRecipeId);
 router.post('/', postRecipe);
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+//diets
+router.get('/', getDiets);
+
 
 module.exports = router;

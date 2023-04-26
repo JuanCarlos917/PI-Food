@@ -9,7 +9,7 @@ const getRecipeById = async (id) => {
 			const recipeDB = await Recipe.findByPk(id, {
 				include: {
 					model: Diets,
-					attributes: ['name_diets'],
+					attributes: ['name'],
 					through: {
 						attributes: [],
 					},

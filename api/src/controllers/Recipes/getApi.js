@@ -48,8 +48,10 @@ const getApi = async () => {
 		});
 		return recipes;
 	} catch (error) {
-		return { msg: error.message };
+		return { message: error.message };
 	}
+
+
 };
 
 module.exports = getApi;
