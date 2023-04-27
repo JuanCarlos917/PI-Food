@@ -1,4 +1,4 @@
-const { Recipe, Diets } = require('../../db');
+const { Recipe, Diet } = require('../../db');
 
 const postDataRecipes = async (recipe) => {
 	console.log(recipe);
@@ -10,7 +10,7 @@ const postDataRecipes = async (recipe) => {
 		image,
 		steps,
 	});
-	let dietsCreated = await Diets.findAll({
+	let dietsCreated = await Diet.findAll({
 		where: {
 			name: diets,
 		},
@@ -33,7 +33,7 @@ const postDataRecipes = async (recipe) => {
 			'createDb',
 		],
 		include: {
-			model: Diets,
+			model: Diet,
 			attributes: ['id', 'name'],
 			through: {
 				attributes: [],

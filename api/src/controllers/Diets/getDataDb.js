@@ -1,7 +1,7 @@
-const { Diets } = require('../../db');
+const { Diet } = require('../../db');
 
 const getDietsDb = async () => {
-	const diets = await Diets.findAll({
+	const diets = await Diet.findAll({
 		attributes: ['name', 'id'],
 	});
 

@@ -1,4 +1,4 @@
-const { Diets } = require('../../db');
+const { Diet } = require('../../db');
 
 const loaderDiets = async () => {
 	const diets = [
@@ -18,7 +18,7 @@ const loaderDiets = async () => {
 	let allDiets = [];
 	for (let i = 0; i < diets.length; i++) {
 		allDiets.push(
-			Diets.findOCreate({
+			Diet.findOCreate({
 				where: {
 					name: diets[i],
 				},

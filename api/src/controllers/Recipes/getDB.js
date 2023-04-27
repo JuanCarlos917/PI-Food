@@ -1,48 +1,44 @@
-const { Recipe, Diets } = require('../../db');
+const { Recipe, Diet } = require('../../db');
 
 const getDb = async () => {
-	try {
-		const recipes = await Recipe.findAll({
-			include: {
-				model: Diets,
-				attributes: [
-					'id',
-					'title',
-					'summary',
-					'healthScore',
-					'steps',
-					'image',
-					'createDb',
-				],
-				through: {
-					attributes: [],
-				},
-			},
-		});
+	const recipes = await Recipe.findAll({
+		attributes: [
+			'id',
+			'title',
+			'summary',
+			'healthScore',
+			'steps',
+			'image',
+			'createDb',
+		],
+		include: { model: Diet },
+	});
 
-		if (recipes.length === 0) {
-			return [];
-		} else {
-			return recipes.map((e) => {
-				return {
-					id: e.dataValues.id,
-					title: e.dataValues.title,
-					summary: e.dataValues.summary,
-					healthScore: e.dataValues.healthScore,
-					image: e.dataValues.image,
-					steps: e.dataValues.steps,
-					diet: e.dataValues.diet.map((y) => {
-						return {
-							name: y.name,
-						};
-					}),
-					createDb: e.dataValues.createDb,
-				};
-			});
-		}
-	} catch (error) {
-		return { msg: error.message };
-	}
+	return await recipes.map(() => {
+		return recipes.map(
+			({
+				dataValues: {
+					id,
+					title,
+					summary,
+					healthScore,
+					image,
+					steps,
+					diets,
+					createDb,
+				},
+			}) => ({
+				id,
+				title,
+				summary,
+				healthScore,
+				image,
+				steps,
+				diets: diets.map(({ name }) => ({ name })),
+				createDb,
+			}),
+		);
+	});
 };
 
 module.exports = getDb;
