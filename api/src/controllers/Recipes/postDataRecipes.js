@@ -17,7 +17,7 @@ const postDataRecipes = async (recipe) => {
 	});
 
 	if (dietsCreated.length > 0) {
-		await recipeCreated.addDiets(dietsCreated);
+		await recipeCreated.addDiet(dietsCreated);
 	}
 	const result = await Recipe.findOne({
 		where: {
