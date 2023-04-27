@@ -14,31 +14,30 @@ const getDb = async () => {
 		include: { model: Diet },
 	});
 
-	return await recipes.map(() => {
-		return recipes.map(
-			({
-				dataValues: {
-					id,
-					title,
-					summary,
-					healthScore,
-					image,
-					steps,
-					diets,
-					createDb,
-				},
-			}) => ({
+	return await recipes.map(
+		({
+			dataValues: {
 				id,
 				title,
 				summary,
 				healthScore,
 				image,
 				steps,
-				diets: diets.map(({ name }) => ({ name })),
 				createDb,
-			}),
-		);
-	});
+			},
+			diets,
+		}) => ({
+			id,
+			title,
+			summary,
+			healthScore,
+			image,
+			steps,
+			diets: diets.map(({ name }) => ({ name })),
+			createDb,
+		}),
+	);
+
 };
 
 module.exports = getDb;
