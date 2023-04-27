@@ -14,7 +14,6 @@ const router = Router();
 router.get('/', getRecipeByname)
 router.get('/:id', getRecipeId);
 router.post('/', postRecipe);
-
 //diets
 router.get('/', getDiets);
 
