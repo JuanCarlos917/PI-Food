@@ -10,13 +10,14 @@ import {
 	GET_RECIPES_BY_NAME,
 	GET_DIETS,
 } from './actions-types';
-
 import axios from 'axios';
+
 
 export const getRecipe = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get('/recipes');
+			const response = await axios.get('/');
+            console.log(response);
 			dispatch({ type: GET_RECIPES, payload: response.data });
 		} catch (error) {
 			console.log(error);
@@ -87,12 +88,12 @@ export const filterOrigin = (payload) => {
     };
 }
 
-export const orderBy = (payload) => {
-    return {
-        type: ORDERBY,
-        payload: payload,
-    };
-}
+export const orderCards = (payload) => {
+	return {
+		type: ORDERBY,
+		payload: payload,
+	};
+};
 
 export const resetFilter = () => {
     return {

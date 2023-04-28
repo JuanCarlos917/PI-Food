@@ -11,6 +11,7 @@ import {
 	GET_DIETS,
 } from './actions-types';
 
+
 const initialState = {
 	recipes: [],
 	allRecipes: [],
