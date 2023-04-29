@@ -12,7 +12,7 @@ function Pagination(props) {
 	}
 
 	return (
-		<div className={styles.pageBtnContainer}></div>
+		<div className={styles.pageBtnContainer}>
 			{currentPage > 1 && (
 				<button
 					onClick={() => handlePageClick(currentPage - 1)}
