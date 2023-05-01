@@ -141,7 +141,7 @@ const rootReducer = (state = initialState, action) => {
 		case RESET_FILTER:
 			return {
 				...state,
-				recipes: state.allRecipes,
+				allRecipes: action.payload,
 			};
 		default:
 			return state;

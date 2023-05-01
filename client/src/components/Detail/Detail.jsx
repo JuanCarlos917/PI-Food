@@ -1,39 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Detail.module.css';
+import loading from '../../assets/img.png';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function Detail() {
-	const [recipe, setRecipe] = useState({});
-	const recipeDetail = useSelector((state) => state.newRecipes);
+	const recipeDet = useSelector((state) => state.newRecipes[0]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		setRecipe(recipeDetail);
-	}, [recipeDetail]);
+		setIsLoading(false);
+	}, []);
+
+	function removerCaracteres(str) {
+		if (str === null || str === '') return false;
+		else str = str.toString();
+
+		return str.replace(/(<([^>]+)>)/gi, '');
+	}
 
 	return (
-		<div className={styles.card}>
-			<div className={styles.card__header}>
-				<img src={recipe.image} alt={recipe.title} />
-			</div>
-			<div className={styles.card__body}>
-				<h3 className={styles.card__title}>{recipe.title}</h3>
-				<div className={styles.card__diets}>
-					<p className={styles.card__P}>
-						{recipe.diets?.map((diet) => (
-							<span key={diet.name} className={styles.card__diet}>
-								{diet.name}
-							</span>
-						))}
-					</p>
+		<div className={styles.detailSection}>
+			{isLoading ? (
+				<div className={styles.loading}>
+					<img src={loading} alt='Loading...' />
 				</div>
-				<div className={styles.card__healthScore}>
-					<span>Health Score: {recipe.healthScore}</span>
+			) : (
+				<div>
+					<div className={styles.overlay} />
+					<div className={styles.title}>
+						<h2>{recipeDet.title}</h2>
+					</div>
+
+					<div className={styles.recipeDetail}>
+						<div>
+							<div className={styles.infoContainer}>
+								<div className={styles.diets}>
+									<p id={styles.diets}>
+										{recipeDet.diets &&
+											recipeDet.diets.map((diet, ind) => (
+												<span
+													key={ind}
+													className={styles.span}>
+													{diet.name}
+												</span>
+											))}
+									</p>
+								</div>
+								<p>ID: {recipeDet.id}</p>
+								<p>
+									{recipeDet.summary &&
+										removerCaracteres(recipeDet.summary)}
+								</p>
+								<p>Health Score: {recipeDet.healthScore}</p>
+							</div>
+							<div className={styles.img}>
+								<img src={recipeDet.image} alt='' />
+							</div>
+						</div>
+						<h2>Steps:</h2>
+						<div className={styles.listSteps}>
+							<ul>
+								{recipeDet.steps &&
+									recipeDet.steps.map((x, index) => (
+										<li key={index}>
+											{x.number}: {x.step}
+										</li>
+									))}
+							</ul>
+						</div>
+						<Link
+							to={'/home'}
+							className={styles.button}
+							style={{ textDecoration: 'none' }}>
+							Back
+						</Link>
+					</div>
 				</div>
-			</div>
-			<Link to={'/home'}>
-				<button className={styles.card__button}>Back</button>
-			</Link>
+			)}
 		</div>
 	);
 }

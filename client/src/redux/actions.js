@@ -16,7 +16,7 @@ import axios from 'axios';
 export const getRecipe = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get('/');
+			const response = await axios.get(`/`);
             console.log(response);
 			dispatch({ type: GET_RECIPES, payload: response.data });
 		} catch (error) {
@@ -55,7 +55,7 @@ export const getRecipeByDetail = (id) => {
 export const getDiets = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get('/diets');
+            const response = await axios.get(`/diets`);
             dispatch({ type: GET_DIETS, payload: response.data });
         } catch (error) {
             console.log(error);

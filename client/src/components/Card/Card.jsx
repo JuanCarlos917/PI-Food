@@ -11,9 +11,10 @@ export default function Card({ id, title, image, diets, healthScore }) {
 		e.preventDefault();
 		dispatch(getRecipeByDetail(id));
 	};
+
 	return (
 		<div className={styles.card}>
-			<Link to={'/detail'} onClick={() => handleDetail(id)}>
+			<Link to={`/detail/${id}`} onClick={() => handleDetail()}>
 				<div className={styles.card__header}>
 					<img src={image} alt={title} />
 				</div>
