@@ -27,7 +27,7 @@ export default function Home() {
 				<div className={styles.navLink}>
 					<div className={styles.linkHome}>
 						<Link
-							to='/recipe'
+							to='/newrecipe'
 							className={({ isActive }) =>
 								isActive ? styles.active : styles.disable
 							}>
