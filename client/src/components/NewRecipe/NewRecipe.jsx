@@ -25,9 +25,10 @@ function validate(recipe) {
 }
 
 export default function NewRecipe() {
-	const formRef = useRef(null); //*Hook para referencia el form
+	const formRef = useRef(null);
 	const dispatch = useDispatch();
 	const allDiets = useSelector((state) => state.typeDiets);
+	console.log(allDiets);
 	const navigate = useNavigate();
 	const [stepDescription, setStepDescription] = useState('');
 	const [errors, setErrors] = useState({});
@@ -98,7 +99,7 @@ export default function NewRecipe() {
 
 	//* FUNCION PARA LISPIAR LOS PASOS QUE SE HAYAN INGRESADO (CLEAN)
 	const handleDelete = (e) => {
-		console.log(e.target.value);
+
 		e.preventDefault();
 		setRecipe({
 			...recipe,
@@ -257,22 +258,20 @@ export default function NewRecipe() {
 					</div>
 					<div className={styles.inputDietas}>
 						<label className={styles.inputTitle}>Type Diets</label>
-						{allDiets.map((x) => {
-							return (
-								<div key={x.id}>
-									<label htmlFor=''>
-										<input
-											className={styles.inputCheck}
-											type='checkbox'
-											onChange={changeHandler}
-											name='diets'
-											value={x.name}
-										/>
-										{x.name}
-									</label>
-								</div>
-							);
-						})}
+						{allDiets.map((diet) => (
+							<div key={diet.id}>
+								<label htmlFor=''>
+									<input
+										className={styles.inputCheck}
+										type='checkbox'
+										onChange={changeHandler}
+										name='diets'
+										value={diet.name}
+									/>
+									{diet.name}
+								</label>
+							</div>
+						))}
 					</div>
 
 					<button
@@ -298,5 +297,3 @@ export default function NewRecipe() {
 		</div>
 	);
 }
-
-

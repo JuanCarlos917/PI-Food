@@ -13,12 +13,11 @@ import {
 
 
 const initialState = {
-	recipes: [],
+    recipes: [],
 	allRecipes: [],
 	typeDiets: [],
 	newRecipes: [],
 };
-
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_RECIPES:

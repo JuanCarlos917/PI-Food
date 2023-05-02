@@ -28,7 +28,7 @@ export const getRecipe = () => {
 export const getRecipeByName = (name) => {
     return async (dispatch) => {
 		try {
-			const response = await axios(`/recipes?name=${name}`);
+			const response = await axios(`/?name=${name}`);
 			return dispatch({
 				type: GET_RECIPES_BY_NAME,
 				payload: response.data,
@@ -44,7 +44,7 @@ export const getRecipeByName = (name) => {
 export const getRecipeByDetail = (id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`/recipes/${id}`);
+            const response = await axios.get(`/${id}`);
             dispatch({ type: GET_RECIPES_BY_DETAIL, payload: response.data });
         } catch (error) {
             console.log(error);
@@ -55,8 +55,9 @@ export const getRecipeByDetail = (id) => {
 export const getDiets = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`/diets`);
-            dispatch({ type: GET_DIETS, payload: response.data });
+            const response = await axios.get(`/`);
+            dispatch({ type: GET_DIETS, payload: response.data[0].diets });
+            console.log(dispatch.payload);
         } catch (error) {
             console.log(error);
         }
