@@ -29,6 +29,7 @@ export const getRecipeByName = (name) => {
     return async (dispatch) => {
 		try {
 			const response = await axios(`/?name=${name}`);
+            console.log(response);
 			return dispatch({
 				type: GET_RECIPES_BY_NAME,
 				payload: response.data,
@@ -45,6 +46,7 @@ export const getRecipeByDetail = (id) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`/${id}`);
+            console.log(response);
             dispatch({ type: GET_RECIPES_BY_DETAIL, payload: response.data });
         } catch (error) {
             console.log(error);

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import Filter from '../Filter/Filter';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home() {
 	const dispatch = useDispatch();
@@ -18,11 +19,8 @@ export default function Home() {
 		dispatch(actions.getRecipe()).then(() => setIsLoading(false));
 	}, [dispatch]);
 
-
-
 	return (
 		<div className={styles.background}>
-
 			<nav className={styles.Nav}>
 				<div className={styles.navLink}>
 					<div className={styles.linkHome}>
@@ -44,6 +42,9 @@ export default function Home() {
 								Logout
 							</button>
 						</Link>
+					</div>
+					<div className={styles.searchBar}>
+						<SearchBar />
 					</div>
 				</div>
 			</nav>
@@ -82,8 +83,6 @@ export default function Home() {
 	);
 }
 
-
-
 // import React, { useState, useEffect } from 'react';
 // import styles from './Home.module.css';
 // import loading from '../../assets/img.png';
@@ -91,7 +90,6 @@ export default function Home() {
 // import { Link } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 // import Card from '../Card/Card';
-
 
 // export default function Home() {
 // 	const dispatch = useDispatch();

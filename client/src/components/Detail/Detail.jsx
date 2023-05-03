@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function Detail() {
-	const recipeDet = useSelector((state) => state.newRecipes[0]);
+	const recipeDet = useSelector((state) => state.newRecipes.filter((x) => x.id === state.recipeDetail) );
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
