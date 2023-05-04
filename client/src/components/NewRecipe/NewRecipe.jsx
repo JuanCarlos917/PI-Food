@@ -3,32 +3,12 @@ import * as actions from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './NewRecipe.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-
-//*Funcion para validar los inputs que reciben informacion del usuario
-function validate(recipe) {
-	const errors = {};
-
-	const regularExpression = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-	const regExpUrl = /^https?:\/\/[\w-]+(\.[\w-]+)+[/#?]?.*$/;
-	if (!recipe.title.trim())
-		errors.title = 'Please put the title of the recipe!';
-	if (!regularExpression.test(recipe.title.trim()))
-		errors.title = 'Title field only accepts letters and blank spaces!';
-	if (!recipe.summary.trim())
-		errors.summary = 'Please put the summary of the recipe!';
-	if (!regExpUrl.test(recipe.image.trim()))
-		errors.image = 'Must be an image URL';
-	if (!recipe.image.trim()) errors.image = 'Please put the image URL';
-	if (!regExpUrl.test(recipe.image.trim()))
-		errors.image = 'Must be an image URL';
-	return errors;
-}
+import validate from './validateRecipe';
 
 export default function NewRecipe() {
 	const formRef = useRef(null);
 	const dispatch = useDispatch();
 	const allDiets = useSelector((state) => state.typeDiets);
-	console.log(allDiets);
 	const navigate = useNavigate();
 	const [stepDescription, setStepDescription] = useState('');
 	const [errors, setErrors] = useState({});
@@ -42,12 +22,12 @@ export default function NewRecipe() {
 		numSteps: 0,
 	});
 
-	//*cuando se renderiza el formulario cargo los tipos de dietas ejecutando la actions
+
 	useEffect(() => {
 		dispatch(actions.getDiets());
 	}, [dispatch]);
 
-	//*Funcion Handler que captura la informacion de los input y a la vez realiza las validaciones
+
 	const handleChange = (e) => {
 		setRecipe({
 			...recipe,
@@ -62,7 +42,6 @@ export default function NewRecipe() {
 		);
 	};
 
-	//* Funcion handler para capturar los tipos de dieta que son chequeadas
 	const changeHandler = (e) => {
 		const value = e.target.value;
 		if (e.target.checked) {
@@ -75,7 +54,7 @@ export default function NewRecipe() {
 		}
 	};
 
-	//*Funcion Handler que realiza el envio de la informacion una vez validada o se revalida de que este completa el formnulario
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -97,7 +76,6 @@ export default function NewRecipe() {
 		formRef.current.reset();
 	};
 
-	//* FUNCION PARA LISPIAR LOS PASOS QUE SE HAYAN INGRESADO (CLEAN)
 	const handleDelete = (e) => {
 
 		e.preventDefault();
@@ -108,12 +86,10 @@ export default function NewRecipe() {
 		});
 	};
 
-	//*FUNCION PARA CAPTURAR LO TIPEADO EN EL PASO A PASO
 	function handleChangeStep(e) {
 		setStepDescription(e.target.value);
 	}
 
-	//*FUNCION PARA ADICIONAR LOS PASOS A PASO DE LA RECETA
 	function handleStep(e) {
 		e.preventDefault();
 		if (stepDescription !== '') {
