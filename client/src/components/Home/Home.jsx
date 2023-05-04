@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Home.module.css';
 import loading from '../../assets/img.png';
-import * as actions from '../../redux/actions';
+import { getRecipe } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../Card/Card';
@@ -16,29 +16,27 @@ export default function Home() {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		dispatch(actions.getRecipe()).then(() => setIsLoading(false));
+		dispatch(getRecipe()).then(() => setIsLoading(false));
 	}, [dispatch]);
 
 	return (
-		<div className={styles.background}>
-			<nav className={styles.Nav}>
-				<div className={styles.navLink}>
+		<div className={styles.container}>
+			<nav className={styles.nav}>
+				<div className={styles.navLinks}>
 					<div className={styles.linkHome}>
 						<Link
 							to='/newrecipe'
-							className={({ isActive }) =>
-								isActive ? styles.active : styles.disable
-							}>
-							<button id='buttonCreate' className={styles.btn}>
-								Create Recipe{' '}
+							className={styles.createRecipeLink}>
+							<button
+								id='buttonCreate'
+								className={styles.createRecipeBtn}>
+								Create Recipe
 							</button>
 						</Link>
-						<Link
-							to='/'
-							className={({ isActive }) =>
-								isActive ? styles.active : styles.disable
-							}>
-							<button id='buttonLogout' className={styles.btn}>
+						<Link to='/' className={styles.logoutLink}>
+							<button
+								id='buttonLogout'
+								className={styles.logoutBtn}>
 								Logout
 							</button>
 						</Link>
@@ -48,7 +46,7 @@ export default function Home() {
 					</div>
 				</div>
 			</nav>
-			<div>
+			<div className={styles.filterContainer}>
 				<Filter />
 			</div>
 			{isLoading ? (
@@ -60,24 +58,25 @@ export default function Home() {
 					{allRecipes.length ? (
 						<Pagination recipes={allRecipes} pageSize={9}>
 							{({ currentRecipe }) =>
-								currentRecipe.map((recipe) => (
+								currentRecipe.map((recipe, index) => (
 									<Card
 										image={recipe.image}
 										title={recipe.title}
 										diets={recipe.diets}
 										healthScore={recipe.healthScore}
-                                        summary={
-                                            recipe.summary.replace(/<[^>]*>?/g, '')
-                                        }
+										summary={recipe.summary.replace(
+											/<[^>]*>?/g,
+											'',
+										)}
 										id={recipe.id}
+										key={index}
 									/>
 								))
 							}
 						</Pagination>
 					) : (
-						<h2 className={styles.noHayTarjetas}>
-							No hay <br />
-							Delicias Culinarias
+						<h2 className={styles.noRecipesFound}>
+							No culinary recipes found
 						</h2>
 					)}
 				</div>
@@ -85,253 +84,3 @@ export default function Home() {
 		</div>
 	);
 }
-
-// import React, { useState, useEffect } from 'react';
-// import styles from './Home.module.css';
-// import loading from '../../assets/img.png';
-// import * as actions from '../../redux/actions';
-// import { Link } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import Card from '../Card/Card';
-
-// export default function Home() {
-// 	const dispatch = useDispatch();
-// 	const allRecipes = useSelector((state) => state.recipes);
-
-// 	const [isLoading, setIsLoading] = useState(true);
-
-// 	const [currentPage, setCurrentPage] = useState(1);
-// 	const pageSize = 9;
-// 	const pageCount = Math.ceil(allRecipes.length / pageSize);
-// 	const indexOfLastRecipe = currentPage * pageSize; //en un principio sera 9
-// 	const indexOfFirstRecipe = indexOfLastRecipe - pageSize;
-// 	const currentRecipe = allRecipes.slice(
-// 		indexOfFirstRecipe,
-// 		indexOfLastRecipe,
-// 	); //*voy porcionando la informacion de acuerdo al numero de elementos que quiera definir por pagina
-
-// 	function handlePageClick(page) {
-// 		setCurrentPage(page);
-// 	}
-
-// 	useEffect(() => {
-// 		dispatch(actions.getRecipe()).then(() => setIsLoading(false));
-// 	}, [dispatch]);
-
-// 	function handleClick(e) {
-// 		//para resetear las recetas
-// 		e.preventDefault(); //para que no se rompa
-// 		dispatch(actions.resetFilter());
-// 		setCurrentPage(1);
-// 		document.getElementById('orderByName').selectedIndex = 0;
-// 		document.getElementById('orderByHealth').selectedIndex = 0;
-// 		document.getElementById('filteredByDiets').selectedIndex = 0;
-// 		document.getElementById('filteredCreated').selectedIndex = 0;
-// 	}
-
-// 	function handlerFilteredByDiets(e) {
-// 		e.preventDefault();
-// 		dispatch(actions.filterTypeDiet(e.target.value)); //tomara lo que clickea el usuario
-// 		setCurrentPage(1);
-// 		document.getElementById('filteredCreated').selectedIndex = 0;
-// 	}
-
-// 	function handlerFilteredCreated(e) {
-// 		e.preventDefault();
-// 		dispatch(actions.filterOrigin(e.target.value)); //recordar esto es el payload lo del select
-// 		document.getElementById('filteredByDiets').selectedIndex = 0;
-// 		setCurrentPage(1);
-// 	}
-
-// 	function HandlerOrderByName(e) {
-// 		e.preventDefault();
-// 		dispatch(actions.orderCards(e.target.value));
-// 		setCurrentPage(1);
-// 	}
-
-// 	function HandlerOrderByHealth(e) {
-// 		e.preventDefault();
-// 		dispatch(actions.orderCards(e.target.value));
-// 		setCurrentPage(1);
-// 	}
-
-// 	return (
-// 		<div className={styles.background}>
-// 			<nav className={styles.Nav}>
-// 				<div className={styles.navLink}>
-// 					<div className={styles.linkHome}>
-// 						<Link
-// 							to='/recipe'
-// 							className={({ isActive }) =>
-// 								isActive ? styles.active : styles.disable
-// 							}>
-// 							<button id='buttonCreate' className={styles.btn}>
-// 								Create Recipe{' '}
-// 							</button>
-// 						</Link>
-
-// 						<Link
-// 							to='/About'
-// 							className={({ isActive }) =>
-// 								isActive ? styles.active : styles.disable
-// 							}>
-// 							<button id='buttonAbout' className={styles.btn}>
-// 								About
-// 							</button>
-// 						</Link>
-
-// 						<Link
-// 							to='/'
-// 							className={({ isActive }) =>
-// 								isActive ? styles.active : styles.disable
-// 							}>
-// 							<button id='buttonLogout' className={styles.btn}>
-// 								Logout
-// 							</button>
-// 						</Link>
-
-// 					</div>
-
-// 					<div>
-// 						<div>
-// 							<button
-// 								onClick={(e) => {
-// 									handleClick(e);
-// 								}}
-// 								className={styles.btn}>
-// 								Reset Filters
-// 							</button>
-// 						</div>
-// 						<div className={styles.selectsContainer}>
-// 							<select
-// 								id='orderByName'
-// 								onChange={(e) => HandlerOrderByName(e)}
-// 								className={styles.input}
-// 								defaultValue='0'>
-// 								<option disabled value='0'>
-// 									Order by Title
-// 								</option>
-// 								<option value='a-z'>Title (A-Z)</option>
-// 								<option value='z-a'>Title (Z-A)</option>
-// 							</select>
-
-// 							<select
-// 								id='orderByHealth'
-// 								onChange={(e) => HandlerOrderByHealth(e)}
-// 								className={styles.input}
-// 								defaultValue='0'>
-// 								<option disabled value='0'>
-// 									Order by Health Score
-// 								</option>
-// 								<option value='1-9'>
-// 									Ascending Health Score
-// 								</option>
-// 								<option value='9-1'>
-// 									Descending Health Score
-// 								</option>
-// 							</select>
-
-// 							<select
-// 								id='filteredByDiets'
-// 								onChange={(e) => handlerFilteredByDiets(e)}
-// 								className={styles.input}
-// 								defaultValue='0'>
-// 								<option disabled value='0'>
-// 									Filter by Type Diet
-// 								</option>
-// 								<option value='All'>(All Recipes)</option>
-// 								<option value='gluten free'>Gluten free</option>
-// 								<option value='dairy free"'>Dairy free</option>
-// 								<option value='ketogenic'>Ketogenic</option>
-// 								<option value='lacto ovo vegetarian'>
-// 									Lacto ovo vegetarian
-// 								</option>
-// 								<option value='vegan'>Vegan</option>
-// 								<option value='pescatarian'>Pescatarian</option>
-// 								<option value='paleolithic'>Paleolithic</option>
-// 								<option value='primal'>Primal</option>
-// 								<option value='fodmap friendly'>
-// 									Fodmap friendly
-// 								</option>
-// 								<option value='whole 30'>Whole 30</option>
-// 							</select>
-
-// 							<select
-// 								id='filteredCreated'
-// 								onChange={(e) => handlerFilteredCreated(e)}
-// 								className={styles.input}
-// 								defaultValue='0'>
-// 								<option disabled value='0'>
-// 									Filter by Origin
-// 								</option>
-// 								<option value='All'>(All)</option>
-// 								<option value='Db'>Created</option>
-// 								<option value='Api'>API</option>
-// 							</select>
-// 						</div>
-// 					</div>
-// 				</div>
-// 			</nav>
-
-// 			{allRecipes.length ? (
-// 				<div className={styles.pageBtnContainer}>
-// 					{currentPage > 1 && (
-// 						<button
-// 							onClick={() => handlePageClick(currentPage - 1)}
-// 							className={styles.btnPage}>
-// 							{'<'}
-// 						</button>
-// 					)}
-
-// 					{Array.from({ length: pageCount }).map((_, index) => (
-// 						<button
-// 							key={index}
-// 							onClick={() => handlePageClick(index + 1)}
-// 							className={`${
-// 								currentPage === index + 1
-// 									? styles.btnPageActive
-// 									: styles.btnPage
-// 							}`}>
-// 							{index + 1}
-// 						</button>
-// 					))}
-
-// 					{currentPage < pageCount && (
-// 						<button
-// 							onClick={() => handlePageClick(currentPage + 1)}
-// 							className={styles.btnPage}>
-// 							{' '}
-// 							{'>'}{' '}
-// 						</button>
-// 					)}
-// 				</div>
-// 			) : null}
-
-// 			{isLoading ? (
-// 				<div className={styles.loading}>
-// 					<img src={loading} alt='Loading...' />
-// 				</div>
-// 			) : (
-// 				<div className={styles.recipesContainer}>
-// 					{allRecipes.length ? (
-// 						currentRecipe.map((recipe) => (
-// 							<Card
-// 								image={recipe.image}
-// 								title={recipe.title}
-// 								diets={recipe.diets}
-// 								healthScore={recipe.healthScore}
-// 								id={recipe.id}
-
-// 							/>
-// 						))
-// 					) : (
-// 						<h2 className={styles.noHayTarjetas}>
-// 							No hay <br />
-// 							Delicias Culinarias
-// 						</h2>
-// 					)}
-// 				</div>
-// 			)}
-// 		</div>
-// 	);
-// }
