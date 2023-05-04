@@ -8,11 +8,9 @@ import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import Filter from '../Filter/Filter';
 import SearchBar from '../SearchBar/SearchBar';
-
 export default function Home() {
 	const dispatch = useDispatch();
 	const allRecipes = useSelector((state) => state.recipes);
-
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -21,22 +19,24 @@ export default function Home() {
 
 	return (
 		<div className={styles.container}>
-			<nav className={styles.nav}>
-				<div className={styles.navLinks}>
+			<nav className={styles.Nav}>
+				<div className={styles.navLink}>
 					<div className={styles.linkHome}>
 						<Link
 							to='/newrecipe'
-							className={styles.createRecipeLink}>
-							<button
-								id='buttonCreate'
-								className={styles.createRecipeBtn}>
-								Create Recipe
+							className={({ isActive }) =>
+								isActive ? styles.active : styles.disable
+							}>
+							<button id='buttonCreate' className={styles.btn}>
+								Create Recipe{' '}
 							</button>
 						</Link>
-						<Link to='/' className={styles.logoutLink}>
-							<button
-								id='buttonLogout'
-								className={styles.logoutBtn}>
+						<Link
+							to='/'
+							className={({ isActive }) =>
+								isActive ? styles.active : styles.disable
+							}>
+							<button id='buttonLogout' className={styles.btn}>
 								Logout
 							</button>
 						</Link>
@@ -46,7 +46,7 @@ export default function Home() {
 					</div>
 				</div>
 			</nav>
-			<div className={styles.filterContainer}>
+			<div>
 				<Filter />
 			</div>
 			{isLoading ? (
@@ -64,13 +64,18 @@ export default function Home() {
 										title={recipe.title}
 										diets={recipe.diets}
 										healthScore={recipe.healthScore}
-										key={index}
+										summary={recipe.summary.replace(
+											/<[^>]*>?/g,
+											'',
+										)}
+										id={recipe.id}
+                                        key={index}
 									/>
 								))
 							}
 						</Pagination>
 					) : (
-						<h2 className={styles.noRecipesFound}>
+						<h2 className={styles.noHayTarjetas}>
 							No culinary recipes found
 						</h2>
 					)}
