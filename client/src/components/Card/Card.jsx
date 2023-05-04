@@ -5,46 +5,32 @@ import { useDispatch } from 'react-redux';
 import { getRecipeByDetail } from '../../redux/actions';
 
 export default function Card(props) {
-    const { id, title, image, diets, healthScore, summary, steps } =
+    const { id, title, image, diets, healthScore } =
 		props;
 	const dispatch = useDispatch();
 
-	const handleDetail = (e) => {
-		e.preventDefault();
+	const handleDetail = () => {
 		dispatch(getRecipeByDetail(id));
 	};
 
 	return (
-		<div className={styles.card}>
-			<Link to={`/detail/${id}`} onClick={() => handleDetail()}>
-				<div className={styles.card__header}>
-					<img src={image} alt={title} />
+		<Link to={`/detail`} onClick={handleDetail}>
+			<div className={styles.recipes}>
+				<div>
+					<img src={image} alt='' />
 				</div>
-				<div className={styles.card__body}>
-					<h3 className={styles.card__title}>{title}</h3>
-					<div className={styles.card__diets}>
-						<p className={styles.card__P}>
+				<div className={styles.info}>
+					<h2>{title}</h2>
+					<p>Health Score: {healthScore}</p>
+					<div className={styles.diets}>
+						<p id={styles.diets}>
 							{diets?.map((diet) => (
-								<span
-									key={diet.name}
-									className={styles.card__diet}>
-									{diet.name}
-								</span>
-
+								<span className={styles.span}>{diet.name}</span>
 							))}
 						</p>
-                        <p>
-                            {summary}
-                        </p>
-                        <p>
-                            {steps}
-                        </p>
-					</div>
-					<div className={styles.card__healthScore}>
-						<span>Health Score: {healthScore}</span>
 					</div>
 				</div>
-			</Link>
-		</div>
+			</div>
+		</Link>
 	);
 }

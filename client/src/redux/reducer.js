@@ -11,9 +11,8 @@ import {
 	GET_DIETS,
 } from './actions-types';
 
-
 const initialState = {
-    recipes: [],
+	recipes: [],
 	allRecipes: [],
 	typeDiets: [],
 	newRecipes: [],
@@ -56,26 +55,25 @@ const rootReducer = (state = initialState, action) => {
 				recipes: dietFilter,
 			};
 		case FILTER_ORGIN:
-			let filterCriteria;
+			let filterR = [];
+
 			switch (action.payload) {
 				case 'All':
-					filterCriteria = () => true;
+					filterR = state.allRecipes;
 					break;
-				case 'Data Base':
-					filterCriteria = (recipe) => recipe.createDb;
+				case 'Db':
+					filterR = state.allRecipes.filter((e) => e.createDb);
 					break;
-				case 'API':
-					filterCriteria = (recipe) => !recipe.createDb;
+				case 'Api':
+					filterR = state.allRecipes.filter((e) => !e.createDb);
 					break;
 				default:
-					filterCriteria = () => true;
+					filterR = state.allRecipes;
 			}
-
-			const filteredRecipes = state.allRecipes.filter(filterCriteria);
 
 			return {
 				...state,
-				recipes: filteredRecipes,
+				recipes: filterR,
 			};
 
 		case ORDERBY:

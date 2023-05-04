@@ -8,14 +8,14 @@ import NewRecipe from './components/NewRecipe/NewRecipe';
 
 function App() {
   return (
-    <div className="App">
-        <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/detail" element={<Detail />} />
-            <Route path="/newrecipe" element={<NewRecipe />} />
-        </Routes>
-    </div>
+		<div className='App'>
+			<Routes>
+				<Route path='/' element={<LandingPage />} />
+				<Route path='/home' element={<Home />} />
+				<Route path='/detail' element={<Detail />} />
+				<Route path='/newrecipe' element={<NewRecipe />} />
+			</Routes>
+		</div>
   );
 }
 

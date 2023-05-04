@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import styles from './Detail.module.css';
 import loading from '../../assets/img.png';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { getRecipeByDetail } from '../../redux/actions';
 
 export default function Detail() {
-	const recipeDet = useSelector((state) => state.newRecipes.filter((x) => x.id === state.recipeDetail) );
+	const recipeDet = useSelector((state) => state.newRecipes);
 	const [isLoading, setIsLoading] = useState(true);
+	const dispatch = useDispatch();
+const { id } = useParams();
 
 	useEffect(() => {
+		dispatch(getRecipeByDetail(id));
 		setIsLoading(false);
-	}, []);
+	}, [dispatch,id]);
 
 	function removerCaracteres(str) {
 		if (str === null || str === '') return false;
