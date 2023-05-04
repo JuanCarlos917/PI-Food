@@ -223,9 +223,9 @@ export default function NewRecipe() {
 							</button>
 						</div>
 						<ul>
-							{recipe.steps.map((e, idx) => {
+							{recipe.steps.map((e, index) => {
 								return (
-									<p key={idx} className={styles.listSteps}>
+									<p key={index} className={styles.listSteps}>
 										{e.number} : {e.step}
 									</p>
 								);
