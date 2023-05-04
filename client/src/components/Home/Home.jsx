@@ -64,11 +64,6 @@ export default function Home() {
 										title={recipe.title}
 										diets={recipe.diets}
 										healthScore={recipe.healthScore}
-										summary={recipe.summary.replace(
-											/<[^>]*>?/g,
-											'',
-										)}
-										id={recipe.id}
 										key={index}
 									/>
 								))
