@@ -1,66 +1,75 @@
 import React from 'react';
 import styles from './Filter.module.css';
 import { useDispatch } from 'react-redux';
-import * as actions from '../../redux/actions';
+import { filterTypeDiet, filterOrigin, orderCards } from '../../redux/actions';
 
 export default function Filter() {
 	const dispatch = useDispatch();
 
 	function handleFilteredByDiets(e) {
 		e.preventDefault();
-		dispatch(actions.filterTypeDiet(e.target.value));
+		dispatch(filterTypeDiet(e.target.value));
 	}
 
 	function handleFilteredCreated(e) {
 		e.preventDefault();
-		dispatch(actions.filterOrigin(e.target.value));
+		dispatch(filterOrigin(e.target.value));
 	}
 
 	function handleOrderByName(e) {
 		e.preventDefault();
-		dispatch(actions.orderCards(e.target.value));
+		dispatch(orderCards(e.target.value));
 	}
 
 	function handleOrderByHealth(e) {
 		e.preventDefault();
-		dispatch(actions.orderCards(e.target.value));
+		dispatch(orderCards(e.target.value));
 	}
 
 	return (
-		<div className={styles.selectsContainer}>
+		<nav className={styles.filterNav}>
+			<label htmlFor='orderByName' className={styles.filterLabel}>
+				Order by Title:
+			</label>
 			<select
 				id='orderByName'
 				onChange={handleOrderByName}
-				className={styles.input}
+				className={styles.filterSelect}
 				defaultValue='0'>
 				<option disabled value='0'>
-					Order by Title
+					Select order
 				</option>
-				<option value='a-z'> (A-Z)</option>
-				<option value='z-a'> (Z-A)</option>
+				<option value='a-z'>A-Z</option>
+				<option value='z-a'>Z-A</option>
 			</select>
 
+			<label htmlFor='orderByHealth' className={styles.filterLabel}>
+				Order by Health Score:
+			</label>
 			<select
 				id='orderByHealth'
 				onChange={handleOrderByHealth}
-				className={styles.input}
+				className={styles.filterSelect}
 				defaultValue='0'>
 				<option disabled value='0'>
-					Order by Health Score
+					Select order
 				</option>
 				<option value='1-9'>Ascending Health Score</option>
 				<option value='9-1'>Descending Health Score</option>
 			</select>
 
+			<label htmlFor='filteredByDiets' className={styles.filterLabel}>
+				Filter by Type Diet:
+			</label>
 			<select
 				id='filteredByDiets'
 				onChange={handleFilteredByDiets}
-				className={styles.input}
+				className={styles.filterSelect}
 				defaultValue='0'>
 				<option disabled value='0'>
-					Filter by Type Diet
+					Select type of diet
 				</option>
-				<option value='All'>(All Recipes)</option>
+				<option value='All'>All Recipes</option>
 				<option value='gluten free'>Gluten free</option>
 				<option value='dairy free"'>Dairy free</option>
 				<option value='ketogenic'>Ketogenic</option>
@@ -75,18 +84,21 @@ export default function Filter() {
 				<option value='whole 30'>Whole 30</option>
 			</select>
 
+			<label htmlFor='filteredCreated' className={styles.filterLabel}>
+				Filter by Origin:
+			</label>
 			<select
 				id='filteredCreated'
 				onChange={handleFilteredCreated}
-				className={styles.input}
+				className={styles.filterSelect}
 				defaultValue='0'>
 				<option disabled value='0'>
-					Filter by Origin
+					Select origin
 				</option>
 				<option value='All'>All</option>
-				<option value='Db'>Created</option>
+				<option value='Db'>created in the database</option>
 				<option value='Api'>API</option>
 			</select>
-		</div>
+		</nav>
 	);
 }
