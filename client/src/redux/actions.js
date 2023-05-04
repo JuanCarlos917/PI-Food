@@ -58,7 +58,7 @@ export const getDiets = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`/`);
-            dispatch({ type: GET_DIETS, payload: response.data[0].diets });
+            dispatch({ type: GET_DIETS, payload: response.data[11].diets });
             console.log(dispatch.payload);
         } catch (error) {
             console.log(error);
@@ -69,7 +69,8 @@ export const getDiets = () => {
 export const addRecipe = (payload) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('/recipe', payload);
+            const response = await axios.post('/', payload);
+            console.log(response);
             dispatch({ type: ADD_RECIPE, payload: response.data });
         } catch (error) {
             console.log(error);

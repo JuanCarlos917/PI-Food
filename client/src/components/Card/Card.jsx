@@ -4,7 +4,9 @@ import styles from './Card.module.css';
 import { useDispatch } from 'react-redux';
 import { getRecipeByDetail } from '../../redux/actions';
 
-export default function Card({ id, title, image, diets, healthScore }) {
+export default function Card(props) {
+    const { id, title, image, diets, healthScore, summary, steps } =
+		props;
 	const dispatch = useDispatch();
 
 	const handleDetail = (e) => {
@@ -28,8 +30,15 @@ export default function Card({ id, title, image, diets, healthScore }) {
 									className={styles.card__diet}>
 									{diet.name}
 								</span>
+
 							))}
 						</p>
+                        <p>
+                            {summary}
+                        </p>
+                        <p>
+                            {steps}
+                        </p>
 					</div>
 					<div className={styles.card__healthScore}>
 						<span>Health Score: {healthScore}</span>
