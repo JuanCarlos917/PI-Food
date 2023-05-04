@@ -55,16 +55,25 @@ export const getRecipeByDetail = (id) => {
 }
 
 export const getDiets = () => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`/`);
-            dispatch({ type: GET_DIETS, payload: response.data[11].diets });
-            console.log(dispatch.payload);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-}
+	return async (dispatch) => {
+		try {
+			const response = await axios.get(`/`);
+			const diets = response.data.flatMap((recipe) => recipe.diets);
+			const uniqueDiets = {};
+			const filteredDiets = diets.filter((diet) => {
+				if (!uniqueDiets[diet.name]) {
+					uniqueDiets[diet.name] = true;
+					return true;
+				}
+				return false;
+			});
+			dispatch({ type: GET_DIETS, payload: filteredDiets });
+			console.log(filteredDiets);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
 
 export const addRecipe = (payload) => {
     return async (dispatch) => {
