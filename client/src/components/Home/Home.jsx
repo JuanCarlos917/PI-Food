@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Home.module.css';
-import loading from '../../assets/img.png';
 import { getRecipe } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,8 +49,8 @@ export default function Home() {
 				<Filter />
 			</div>
 			{isLoading ? (
-				<div className={styles.loading}>
-					<img src={loading} alt='Loading...' />
+				<div className={styles.loader}>
+
 				</div>
 			) : (
 				<div className={styles.recipesContainer}>
