@@ -120,11 +120,12 @@ export default function NewRecipe() {
 					onSubmit={handleSubmit}
 					className={styles.formulario}
 					ref={formRef}>
-					<Link
-						to='/home'
-						className={styles.btn}
-						style={{ textDecoration: 'none' }}>
-						Back
+					<Link to='/home'>
+						<button className={styles.buttonPostBack}>
+							<span className={styles.spanPostBack}>
+								Back to home
+							</span>
+						</button>
 					</Link>
 					<div className={styles.imgContainer}>
 						<img src={recipe.image} alt='' />
@@ -141,7 +142,7 @@ export default function NewRecipe() {
 							onChange={handleChange}
 						/>
 						{errors.title && (
-							<span className={styles.errorText}>
+							<span className={styles.errorInput}>
 								{errors.title}
 							</span>
 						)}
@@ -151,7 +152,7 @@ export default function NewRecipe() {
 						<textarea
 							className={
 								errors.summary
-									? styles.errorTextarea
+									? styles.errorInput
 									: styles.textarea
 							}
 							type='text'
@@ -161,7 +162,7 @@ export default function NewRecipe() {
 							onChange={handleChange}
 						/>
 						{errors.summary && (
-							<span className={styles.errorText}>
+							<span className={styles.errorInput}>
 								{errors.summary}
 							</span>
 						)}
@@ -193,7 +194,7 @@ export default function NewRecipe() {
 							onChange={handleChange}
 						/>
 						{errors.image && (
-							<span className={styles.errorText}>
+							<span className={styles.errorInput}>
 								{errors.image}
 							</span>
 						)}
