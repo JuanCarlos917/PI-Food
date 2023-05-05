@@ -13,23 +13,32 @@ export default function Card(props) {
 	};
 
 	return (
-		<article className={styles.card}>
-			<Link to={`/detail`} onClick={handleDetail}>
+		<div className={styles.container}>
+			<article className={styles.card}>
 				<figure className={styles.cardFigure}>
 					<img className={styles.cardImage} src={image} alt={title} />
 				</figure>
-			</Link>
-			<div className={styles.cardContent}>
-				<h2 className={styles.cardTitle}>{title}</h2>
-				<p className={styles.cardText}>Health Score: {healthScore}</p>
-				<ul className={styles.cardDiets}>
-					{diets?.map((diet, index) => (
-						<li key={index} className={styles.cardDiet}>
-							{diet.name}
-						</li>
-					))}
-				</ul>
+				<div className={styles.cardContent}>
+					<h2 className={styles.cardTitle}>{title}</h2>
+					<p className={styles.cardText}>
+						Health Score: {healthScore}
+					</p>
+					<ul className={styles.cardDiets}>
+						{diets?.map((diet, index) => (
+							<li key={index} className={styles.cardDiet}>
+								{diet.name}
+							</li>
+						))}
+					</ul>
+				</div>
+			</article>
+			<div className={styles.buttonContainerCard}>
+				<Link to={`/detail`} onClick={handleDetail}>
+					<button className={styles.buttonCard}>
+						<span className={styles.spanButtonCard}>Detail</span>
+					</button>
+				</Link>
 			</div>
-		</article>
+		</div>
 	);
 }
