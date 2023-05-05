@@ -19,17 +19,6 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<nav className={styles.Nav}>
-				<div className={styles.buttonNewrecipe}>
-					<Link
-						to='/newrecipe'
-						className={({ isActive }) =>
-							isActive ? styles.active : styles.disable
-						}>
-						<button id='buttonCreate' className={styles.btn}>
-							Create Recipe{' '}
-						</button>
-					</Link>
-				</div>
 				<div className={styles.buttonLogout}>
 					<Link
 						to='/'
@@ -41,6 +30,18 @@ export default function Home() {
 						</button>
 					</Link>
 				</div>
+				<div className={styles.buttonNewrecipe}>
+					<Link
+						to='/newrecipe'
+						className={({ isActive }) =>
+							isActive ? styles.active : styles.disable
+						}>
+						<button id='buttonCreate' className={styles.btn}>
+							Create Recipe{' '}
+						</button>
+					</Link>
+				</div>
+
 				<div className={styles.searchBar}>
 					<SearchBar />
 				</div>
