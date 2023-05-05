@@ -1,0 +1,38 @@
+.containerPagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.buttonPage {
+	border: none;
+	background-color: #fffffe;
+	color: ##0f0e17;
+	padding: 10px 15px;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.buttonPageActive {
+	border: none;
+	background-color: #f25f4c;
+	color: #fff;
+	padding: 10px 15px;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.buttonReset {
+	border: none;
+	background-color: #e53170;
+	color: #fffffe;
+	padding: 10px 15px;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}

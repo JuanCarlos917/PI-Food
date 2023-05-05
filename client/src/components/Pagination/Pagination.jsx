@@ -23,9 +23,9 @@ export default function Pagination(props) {
 
 	return (
 		<div>
-			<div className={styles.pageBtnContainer}>
+			<div className={styles.containerPagination}>
 				<div>
-					<button onClick={handleResetFilters} className={styles.btn}>
+					<button onClick={handleResetFilters} className={styles.buttonReset}>
 						Reset Filters
 					</button>
 				</div>
@@ -33,7 +33,7 @@ export default function Pagination(props) {
 				{currentPage > 1 && (
 					<button
 						onClick={() => handlePageClick(currentPage - 1)}
-						className={styles.btnPage}>
+						className={styles.buttonPage}>
 						{'<'}
 					</button>
 				)}
@@ -44,8 +44,8 @@ export default function Pagination(props) {
 						onClick={() => handlePageClick(index + 1)}
 						className={`${
 							currentPage === index + 1
-								? styles.btnPageActive
-								: styles.btnPage
+								? styles.buttonPageActive
+								: styles.buttonPage
 						}`}>
 						{index + 1}
 					</button>
@@ -54,7 +54,7 @@ export default function Pagination(props) {
 				{currentPage < pageCount && (
 					<button
 						onClick={() => handlePageClick(currentPage + 1)}
-						className={styles.btnPage}>
+						className={styles.buttonPage}>
 						{' '}
 						{'>'}{' '}
 					</button>
