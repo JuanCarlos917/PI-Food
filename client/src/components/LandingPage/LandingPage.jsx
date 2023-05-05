@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './LandingPage.module.css';
+import imageLP from '../../assets/bglp.jpg';
 
 export default function LandingPage() {
 	return (
@@ -13,6 +14,9 @@ export default function LandingPage() {
 					<button className={style.buttonHome}>Home</button>
 				</Link>
 			</section>
+
+				<img src={imageLP} alt='img home' className={style.imageLP} />
+
 		</main>
 	);
 }
