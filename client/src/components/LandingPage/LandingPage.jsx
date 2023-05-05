@@ -11,12 +11,12 @@ export default function LandingPage() {
 			</header>
 			<section className={style.buttonContainer}>
 				<Link to='/home'>
-					<button className={style.buttonHome}>Home</button>
+					<button className={style.buttonHome}>
+						<span className={style.spanButtonHome}>Go To Home</span>
+					</button>
 				</Link>
 			</section>
-
-				<img src={imageLP} alt='img home' className={style.imageLP} />
-
+			<img src={imageLP} alt='img home' className={style.imageLP} />
 		</main>
 	);
 }

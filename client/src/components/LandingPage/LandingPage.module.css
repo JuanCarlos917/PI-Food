@@ -19,29 +19,41 @@
 	height: 20vh;
 }
 .buttonHome {
-	padding: 10px 20px;
-	text-transform: uppercase;
-	border-radius: 8px;
-	font-size: 17px;
-	font-weight: 500;
-	color: #ffffff80;
-	text-shadow: none;
-	background: transparent;
-	box-shadow: transparent;
-	border: 1px solid #ffffff80;
-	transition: 0.5s ease;
-	user-select: none;
+	padding: 0.1em 0.25em;
+	width: 13em;
+	height: 4.2em;
+	background-color: #212121;
+	border: 0.08em solid #fef6e4;
+	border-radius: 0.3em;
+	font-size: 12px;
 }
 
-.buttonHome:hover,
-:focus {
-	color: #ffffff;
-	background: #ff8906;
-	border: 1px solid #ff8906;
-	text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-	box-shadow: 0 0 5px #ff8906, 0 0 20px #ff8906, 0 0 50px #ff8906,
-		0 0 100px #ff8906;
+.buttonHome .spanButtonHome {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	bottom: 0.4em;
+	width: 8.25em;
+	height: 2.5em;
+	background-color: #212121;
+	border-radius: 0.2em;
+	font-size: 1.5em;
+	color: #fef6e4;
+	border: 0.08em solid #fef6e4;
+	box-shadow: 0 0.4em 0.1em 0.019em #fef6e4;
 }
+
+.buttonHome .spanButtonHome:hover {
+	transition: all 0.5s;
+	transform: translate(0, 0.4em);
+	box-shadow: 0 0 0 0 #fef6e4;
+}
+
+.buttonHome .spanButtonHome:not(hover) {
+	transition: all 1s;
+}
+
 .imageLP {
 	display: flex;
 	justify-content: center;
