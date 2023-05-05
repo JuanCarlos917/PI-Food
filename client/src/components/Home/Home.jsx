@@ -19,39 +19,37 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<nav className={styles.Nav}>
-				<div className={styles.navLink}>
-					<div className={styles.linkHome}>
-						<Link
-							to='/newrecipe'
-							className={({ isActive }) =>
-								isActive ? styles.active : styles.disable
-							}>
-							<button id='buttonCreate' className={styles.btn}>
-								Create Recipe{' '}
-							</button>
-						</Link>
-						<Link
-							to='/'
-							className={({ isActive }) =>
-								isActive ? styles.active : styles.disable
-							}>
-							<button id='buttonLogout' className={styles.btn}>
-								Logout
-							</button>
-						</Link>
-					</div>
-					<div className={styles.searchBar}>
-						<SearchBar />
-					</div>
+				<div className={styles.buttonNewrecipe}>
+					<Link
+						to='/newrecipe'
+						className={({ isActive }) =>
+							isActive ? styles.active : styles.disable
+						}>
+						<button id='buttonCreate' className={styles.btn}>
+							Create Recipe{' '}
+						</button>
+					</Link>
+				</div>
+				<div className={styles.buttonLogout}>
+					<Link
+						to='/'
+						className={({ isActive }) =>
+							isActive ? styles.active : styles.disable
+						}>
+						<button id='buttonLogout' className={styles.btn}>
+							Logout
+						</button>
+					</Link>
+				</div>
+				<div className={styles.searchBar}>
+					<SearchBar />
 				</div>
 			</nav>
-			<div>
+			<div className={styles.filter}>
 				<Filter />
 			</div>
 			{isLoading ? (
-				<div className={styles.loader}>
-
-				</div>
+				<div className={styles.loader}></div>
 			) : (
 				<div className={styles.recipesContainer}>
 					{allRecipes.length ? (
@@ -68,13 +66,13 @@ export default function Home() {
 											'',
 										)}
 										id={recipe.id}
-                                        key={index}
+										key={index}
 									/>
 								))
 							}
 						</Pagination>
 					) : (
-						<h2 className={styles.noHayTarjetas}>
+						<h2 className={styles.notFound}>
 							No culinary recipes found
 						</h2>
 					)}

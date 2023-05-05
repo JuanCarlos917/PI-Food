@@ -1,0 +1,54 @@
+.filterNav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem 0;
+	background-color: #2e2f3e;
+	padding: 10px;
+}
+
+.filterLabel {
+	font-size: 1rem;
+	font-weight: bold;
+	margin: 0 1rem;
+	color: #ff8906;
+}
+
+.filterSelect {
+	padding: 0.5rem;
+	border: 2px solid #e53170;
+	border-radius: 5px;
+	font-size: 1rem;
+	font-weight: bold;
+	margin-right: 1rem;
+	color: #e53170;
+	background-color: #f2f2f2;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.filterSelect:hover {
+	background-color: #e53170;
+	color: #f2f2f2;
+}
+
+.filterSelect:active {
+	transform: translateY(2px);
+}
+
+option {
+	font-size: 1rem;
+	font-weight: bold;
+	background-color: #f2f2f2;
+	color: #e53170;
+	transition: all 0.3s ease-in-out;
+}
+
+option:hover {
+	background-color: #e53170;
+	color: #f2f2f2;
+}
+
+option:active {
+	transform: translateY(2px);
+}
