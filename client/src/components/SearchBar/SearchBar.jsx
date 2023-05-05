@@ -11,13 +11,13 @@ export default function SearchBar() {
     }
 
     return (
-        <div className={styles.searchBar}>
-            <input
-                className={styles.input}
-                type='text'
-                placeholder='Search...'
-                onChange={(e) => handleChange(e)}
-            />
-        </div>
-    );
+		<div className={styles.searchBar}>
+			<input
+				className={styles.input}
+				type='text'
+				placeholder='Search for a recipe...'
+				onChange={(e) => handleChange(e)}
+			/>
+		</div>
+	);
 }

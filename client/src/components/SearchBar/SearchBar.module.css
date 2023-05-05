@@ -1,0 +1,39 @@
+.searchBar {
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.input {
+	padding: 0.5rem 1rem;
+	font-size: 1.2rem;
+	border-radius: 50px;
+	border: none;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	outline: none;
+	width: 100%;
+	max-width: 500px;
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.input:hover,
+.input:focus {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.input::placeholder {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.input::-webkit-input-placeholder {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.input:-ms-input-placeholder {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.input::-ms-input-placeholder {
+	color: rgba(0, 0, 0, 0.5);
+}
