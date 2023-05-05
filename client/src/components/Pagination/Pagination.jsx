@@ -3,7 +3,8 @@ import styles from './Pagination.module.css';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 
-export default function Pagination({ recipes, pageSize, children }) {
+export default function Pagination(props) {
+	const { recipes, pageSize, children } = props;
 	const dispatch = useDispatch();
 	const [currentPage, setCurrentPage] = useState(1);
 	const pageCount = Math.ceil(recipes.length / pageSize);
